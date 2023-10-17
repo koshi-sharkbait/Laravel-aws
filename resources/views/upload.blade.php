@@ -17,5 +17,9 @@
         @csrf
         <input type="submit" value="SQSテスト">
     </form>
+        <form action="{{ route('job') }}" method="post">
+        @csrf
+        <input type="submit" value="JOBのディスパッチテスト">
+    </form>
 </body>
 </html>

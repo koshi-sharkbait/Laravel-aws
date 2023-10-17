@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Aws\Sqs\SqsClient;
+use App\Jobs\sqs;
 
 class WebApiController extends Controller
 {
@@ -31,5 +32,12 @@ class WebApiController extends Controller
         
         return view('welcome');
         
+    }
+    
+    public function job(Request $request)
+    {
+        sqs::dispatch($request);
+        
+        return view('upload');
     }
 }
