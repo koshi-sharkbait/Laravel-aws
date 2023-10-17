@@ -15,11 +15,9 @@ class WebApiController extends Controller
         $sqs = app()->make('aws')->createClient('sqs');
 
         // SQSのメッセージに渡したい文字列を用意する
-        $value = "hoge/huga/hugo";
+        $value = "test";
 
-        // 送りたいSQSのURLを指定（laravelのconfigにて.envを参照しています)
-        // $queueUrl = config('aws.sqs.url
-        $queueUrl = "https://sqs.ap-northeast-1.amazonaws.com/795600592301/laravelTest-sqs";
+        $queueUrl = "https://sqs.ap-northeast-1.amazonaws.com/{AccountID}/{QueueName}"; #状況に応じて変更
 
         // SDKのAPIで渡すためのパラメータを用意
         $params = [
