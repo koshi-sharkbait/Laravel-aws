@@ -10,30 +10,26 @@ class WebApiController extends Controller
     //
     public function sendSqs()
     {
-        $config = [
-            'credentials' => [
-                'key' => env('AWS_SECRET_ACCESS_KEY'),
-                'secret' => env('AWS_ACCESS_KEY_ID'),
-            ],
-            'region' => 'ap-northeast-1', // ご利用のリージョン
-            'version' => 'latest',
-        ];
-        //SQS Clientを作成
-        $sqs = SqsClient::factory($config);
+        // laravelで設定している認証情報でクライアントを作成
+        $sqs = app()->make('aws')->createClient('sqs');
 
-        // SQSのメッセージ
-        $value = "piyo";
+        // SQSのメッセージに渡したい文字列を用意する
+        $value = "hoge/huga/hugo";
 
-        // 送りたいSQSのURLを指定
-        $sqs_url = env('AWS_SQS_URL');
+        // 送りたいSQSのURLを指定（laravelのconfigにて.envを参照しています)
+        // $queueUrl = config('aws.sqs.url
+        $queueUrl = "https://sqs.ap-northeast-1.amazonaws.com/795600592301/laravelTest-sqs";
 
+        // SDKのAPIで渡すためのパラメータを用意
         $params = [
             'DelaySeconds' => 0,
             'MessageBody' => $value,
-            'QueueUrl' => $sqs_url,
+            'QueueUrl' => $queueUrl,
         ];
 
-        $result = $sqs->sendMessage($params);
+        $sqs->sendMessage($params);
+        
+        return view('welcome');
         
     }
 }

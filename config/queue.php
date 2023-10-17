@@ -60,6 +60,7 @@ return [
             'suffix' => env('SQS_SUFFIX'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
             'after_commit' => false,
+            'url' => env('AWS_SQS_URL', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
         ],
 
         'redis' => [

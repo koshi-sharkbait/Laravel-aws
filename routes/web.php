@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', 'App\Http\Controllers\WebApiController@sendSqs');
+Route::post('sqs', [\App\Http\Controllers\WebApiController::class, 'sendSqs'])->name('sqs');
 
 Route::view('upload', 'upload');
 Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name('s3');

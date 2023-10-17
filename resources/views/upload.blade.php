@@ -13,5 +13,9 @@
         <input type="file" name="file" id="">
         <input type="submit" value="アップロード">
     </form>
+    <form action="{{ route('sqs') }}" method="post">
+        @csrf
+        <input type="submit" value="SQSテスト">
+    </form>
 </body>
 </html>
